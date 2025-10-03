@@ -1,0 +1,16 @@
+<div class="roster-container">
+  <h2>Roster de Partido</h2>
+  <form (ngSubmit)="agregarRegistro()">
+    <input type="number" [(ngModel)]="nuevoRegistro.partido_id" name="partido_id" placeholder="ID Partido" required />
+    <input type="number" [(ngModel)]="nuevoRegistro.equipo_id" name="equipo_id" placeholder="ID Equipo" required />
+    <input type="number" [(ngModel)]="nuevoRegistro.jugador_id" name="jugador_id" placeholder="ID Jugador" required />
+    <button type="submit">Agregar al roster</button>
+  </form>
+  <div *ngIf="error" style="color: red; margin-top: 10px;">{{ error }}</div>
+  <ul>
+      <li *ngFor="let reg of roster">
+        Partido: {{ getNombrePartido(reg.partido_id) }} | Equipo: {{ getNombreEquipo(reg.equipo_id) }} | Jugador: {{ getNombreJugador(reg.jugador_id) }}
+        <button (click)="eliminarRegistro(reg.id)">Eliminar</button>
+      </li>
+  </ul>
+</div>

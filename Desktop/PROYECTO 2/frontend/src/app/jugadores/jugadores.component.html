@@ -1,0 +1,40 @@
+// Mover este archivo a c:\Users\sanchez006\Desktop\PROYECTO 2\frontend\src\app\jugadores\jugadores.component.html
+<div class="jugadores-container">
+	<h2>Jugadores</h2>
+	<div style="margin: 8px 0;">
+		<input type="text" [(ngModel)]="searchTerm" placeholder="Buscar por nombre, posición o nacionalidad" />
+		<input type="number" [(ngModel)]="filtroEquipoId" placeholder="Filtrar por ID de equipo" />
+		<button (click)="cargarJugadores()">Buscar</button>
+	</div>
+	<form (ngSubmit)="crearJugador()">
+		<input type="number" [(ngModel)]="nuevoJugador.equipoId" name="equipoId" placeholder="ID Equipo" required />
+		<input type="number" [(ngModel)]="nuevoJugador.numero" name="numero" placeholder="Número" required />
+		<input type="number" [(ngModel)]="nuevoJugador.estatura" name="estatura" placeholder="Estatura" required />
+		<input type="number" [(ngModel)]="nuevoJugador.edad" name="edad" placeholder="Edad" required />
+		<input type="text" [(ngModel)]="nuevoJugador.nombre" name="nombre" placeholder="Nombre" required />
+		<input type="text" [(ngModel)]="nuevoJugador.posicion" name="posicion" placeholder="Posición" required />
+		<input type="text" [(ngModel)]="nuevoJugador.nacionalidad" name="nacionalidad" placeholder="Nacionalidad" required />
+		<button type="submit">Crear jugador</button>
+	</form>
+	<div *ngIf="error" style="color: red; margin-top: 10px;">{{ error }}</div>
+	<ul>
+		<li *ngFor="let jugador of jugadores">
+			<span *ngIf="!jugadorEditando || jugadorEditando.id !== jugador.id">
+				{{ jugador.nombre }} ({{ jugador.numero }}) - {{ jugador.posicion }}
+			</span>
+			<button *ngIf="!jugadorEditando" (click)="iniciarEdicion(jugador)">Editar</button>
+			<button *ngIf="!jugadorEditando" (click)="eliminarJugador(jugador.id)">Eliminar</button>
+			<span *ngIf="jugadorEditando && jugadorEditando.id === jugador.id">
+				<input type="number" [(ngModel)]="jugadorEditando.equipoId" placeholder="ID Equipo" />
+				<input type="number" [(ngModel)]="jugadorEditando.numero" placeholder="Número" />
+				<input type="number" [(ngModel)]="jugadorEditando.estatura" placeholder="Estatura" />
+				<input type="number" [(ngModel)]="jugadorEditando.edad" placeholder="Edad" />
+				<input type="text" [(ngModel)]="jugadorEditando.nombre" placeholder="Nombre" />
+				<input type="text" [(ngModel)]="jugadorEditando.posicion" placeholder="Posición" />
+				<input type="text" [(ngModel)]="jugadorEditando.nacionalidad" placeholder="Nacionalidad" />
+				<button (click)="guardarEdicion()">Guardar</button>
+				<button (click)="cancelarEdicion()">Cancelar</button>
+			</span>
+		</li>
+	</ul>
+</div>

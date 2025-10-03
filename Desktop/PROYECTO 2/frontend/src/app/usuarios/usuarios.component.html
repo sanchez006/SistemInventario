@@ -1,0 +1,28 @@
+<div class="usuarios-container">
+	<h2>Usuarios</h2>
+	<form (ngSubmit)="crearUsuario()">
+		<input type="text" [(ngModel)]="nuevoUsuario.username" name="username" placeholder="Usuario" required />
+		<input type="password" [(ngModel)]="nuevoUsuario.password_hash" name="password_hash" placeholder="Contraseña" required />
+		<input type="text" [(ngModel)]="nuevoUsuario.nombre" name="nombre" placeholder="Nombre" required />
+		<input type="text" [(ngModel)]="nuevoUsuario.Rol" name="Rol" placeholder="Rol" required />
+		<button type="submit">Crear usuario</button>
+	</form>
+	<div *ngIf="error" style="color: red; margin-top: 10px;">{{ error }}</div>
+	<ul>
+		<li *ngFor="let usuario of usuarios">
+			<span *ngIf="!usuarioEditando || usuarioEditando.id !== usuario.id">
+				{{ usuario.nombre }} ({{ usuario.username }}) - Rol: {{ usuario.Rol || usuario.rol || '(sin rol)' }}
+			</span>
+			<button *ngIf="!usuarioEditando" (click)="iniciarEdicion(usuario)">Editar</button>
+			<button *ngIf="!usuarioEditando" (click)="eliminarUsuario(usuario.id)">Eliminar</button>
+			<span *ngIf="usuarioEditando && usuarioEditando.id === usuario.id">
+				<input type="text" [(ngModel)]="usuarioEditando.username" placeholder="Usuario" />
+				<input type="password" [(ngModel)]="usuarioEditando.password_hash" placeholder="Contraseña" />
+				<input type="text" [(ngModel)]="usuarioEditando.nombre" placeholder="Nombre" />
+				<input type="text" [(ngModel)]="usuarioEditando.Rol" placeholder="Rol" />
+				<button (click)="guardarEdicion()">Guardar</button>
+				<button (click)="cancelarEdicion()">Cancelar</button>
+			</span>
+		</li>
+	</ul>
+</div>

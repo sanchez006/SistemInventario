@@ -1,0 +1,65 @@
+<div class="marcador-container">
+  <div class="nav-panel" style="margin-bottom: 16px; text-align: right;">
+    <ng-container *ngIf="isAdmin(); else basicNav">
+      <button routerLink="/partidos" style="margin-right: 8px;">Partidos</button>
+      <button routerLink="/equipos" style="margin-right: 8px;">Equipos</button>
+      <button routerLink="/usuarios" style="margin-right: 8px;">Usuarios</button>
+    </ng-container>
+    <ng-template #basicNav></ng-template>
+    <button (click)="logout()">Cerrar sesión</button>
+  </div>
+  <div class="selector-partido-panel">
+    <label for="partidoSelect">Seleccionar partido:</label>
+    <select id="partidoSelect" [(ngModel)]="partidoSeleccionadoId" (change)="onPartidoSeleccionado()">
+      <option *ngFor="let partido of partidos" [value]="partido.id">
+        {{ (partido.equipo_local?.nombre || getNombreEquipo(partido.equipoLocalId)) || 'Local' }}
+        vs
+        {{ (partido.equipo_visitante?.nombre || getNombreEquipo(partido.equipoVisitanteId)) || 'Visitante' }}
+        - {{ partido.fecha | date:'short' }}
+      </option>
+    </select>
+  </div>
+  <h2 class="titulo">PARTIDOS</h2>
+  <div class="timer-panel">
+    <span class="estado" [class.pausado]="pausado">{{ pausado ? 'Paused' : 'Running' }}</span>
+    <span class="timer">{{ tiempo }}</span>
+    <div class="timer-controls">
+      <button (click)="startTimer()">Start</button>
+      <button (click)="stopTimer()">Stop</button>
+      <button (click)="resetTimer()">Reset</button>
+    </div>
+  </div>
+  <div class="equipos-panel" *ngIf="equipoLocal && equipoVisitante">
+    <div class="equipo">
+  <h3 *ngIf="equipoLocal?.nombre">{{ equipoLocal.nombre }}</h3>
+      <div class="score-panel">
+        <button (click)="restarPuntos('local', 1)">-1</button>
+  <span class="score">{{ equipoLocal?.puntos ?? 0 }}</span>
+        <button (click)="sumarPuntos('local', 1)">+1</button>
+        <button (click)="sumarPuntos('local', 2)">+2</button>
+        <button (click)="sumarPuntos('local', 3)">+3</button>
+      </div>
+  <div class="faltas">Faltas: {{ equipoLocal?.faltas ?? 0 }}</div>
+    </div>
+    <div class="periodo-panel">
+      <div class="periodo-controls">
+        <button (click)="retrocederPeriodo()">-1</button>
+        <span class="periodo">{{ periodo }}</span>
+        <button (click)="avanzarPeriodo()">+1</button>
+      </div>
+
+    </div>
+    <div class="equipo">
+ 
+  <h3 *ngIf="equipoVisitante?.nombre">{{ equipoVisitante.nombre }}</h3>
+      <div class="score-panel">
+        <button (click)="restarPuntos('visitante', 1)">-1</button>
+  <span class="score">{{ equipoVisitante?.puntos ?? 0 }}</span>
+        <button (click)="sumarPuntos('visitante', 1)">+1</button>
+        <button (click)="sumarPuntos('visitante', 2)">+2</button>
+        <button (click)="sumarPuntos('visitante', 3)">+3</button>
+      </div>
+  <div class="faltas">Faltas: {{ equipoVisitante?.faltas ?? 0 }}</div>
+    </div>
+  </div>
+</div>

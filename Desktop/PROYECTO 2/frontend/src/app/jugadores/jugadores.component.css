@@ -1,0 +1,30 @@
+/* Estilos para el componente jugadores */
+.jugadores-container {
+  margin: 2rem;
+}
+
+.jugadores-container h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.jugadores-container form {
+  margin-bottom: 1rem;
+}
+
+.jugadores-container input {
+  margin-right: 0.5rem;
+}
+
+.jugadores-container button {
+  margin-right: 0.5rem;
+}
+
+.jugadores-container ul {
+  list-style: none;
+  padding: 0;
+}
+
+.jugadores-container li {
+  margin-bottom: 0.5rem;
+}

@@ -1,0 +1,29 @@
+<div class="equipos-container">
+	<h2>Equipos</h2>
+	<div style="margin: 8px 0;">
+		<input type="text" [(ngModel)]="searchTerm" placeholder="Buscar por nombre o ciudad" />
+		<button (click)="cargarEquipos()">Buscar</button>
+	</div>
+	<form (ngSubmit)="crearEquipo()">
+		<input type="text" [(ngModel)]="nuevoEquipo.nombre" name="nombre" placeholder="Nombre del equipo" required />
+		<input type="text" [(ngModel)]="nuevoEquipo.ciudad" name="ciudad" placeholder="Ciudad" required />
+		<input type="text" [(ngModel)]="nuevoEquipo.logo" name="logo" placeholder="URL del logo" required />
+		<button type="submit">Crear equipo</button>
+	</form>
+	<div *ngIf="error" style="color: red; margin-top: 10px;">{{ error }}</div>
+		<ul>
+			<li *ngFor="let equipo of equipos">
+				<span *ngIf="!equipoEditando || equipoEditando.id !== equipo.id">{{ equipo.nombre }}</span>
+				<button *ngIf="!equipoEditando" (click)="iniciarEdicion(equipo)">Editar</button>
+				<button *ngIf="!equipoEditando" (click)="eliminarEquipo(equipo.id)">Eliminar</button>
+
+						<span *ngIf="equipoEditando && equipoEditando.id === equipo.id">
+							<input type="text" [(ngModel)]="equipoEditando.nombre" placeholder="Nombre" />
+							<input type="text" [(ngModel)]="equipoEditando.ciudad" placeholder="Ciudad" />
+							<input type="text" [(ngModel)]="equipoEditando.logo" placeholder="URL del logo" />
+							<button (click)="guardarEdicion()">Guardar</button>
+							<button (click)="cancelarEdicion()">Cancelar</button>
+						</span>
+			</li>
+		</ul>
+</div>

@@ -1,0 +1,33 @@
+# Root ignore rules
+
+# Frontend artifacts
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/
+frontend/coverage/
+frontend/tmp/
+frontend/out-tsc/
+
+# Backend artifacts
+backend/Backend/bin/
+backend/Backend/obj/
+backend/Backend/appsettings.Development.json
+backend/Backend/appsettings.*.local.json
+
+# Database/local data
+database/data/
+database/.env
+*.db
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-error.log*
+
+# Docker env files
+**/.env
+**/.env.local

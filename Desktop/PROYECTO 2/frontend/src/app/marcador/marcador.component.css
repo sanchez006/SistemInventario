@@ -1,0 +1,142 @@
+.marcador-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  background: #1a237e;
+  color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+  padding: 2rem;
+  font-family: 'Roboto', Arial, sans-serif;
+}
+.titulo {
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+  letter-spacing: 2px;
+}
+.timer-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+.timer {
+  font-size: 3rem;
+  background: #212121;
+  padding: 0.5rem 2rem;
+  border-radius: 8px;
+  margin: 0.5rem 0;
+  font-family: 'Digital-7', monospace;
+}
+.estado {
+  font-size: 1.2rem;
+  color: #ffeb3b;
+  margin-bottom: 0.5rem;
+}
+.estado.pausado {
+  color: #f44336;
+}
+.timer-controls button {
+  margin: 0 0.5rem;
+  padding: 0.5rem 1.2rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: none;
+  background: #3949ab;
+  color: #fff;
+  cursor: pointer;
+}
+.equipos-panel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.equipo {
+  flex: 1;
+  text-align: center;
+}
+.logo {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 0.5rem;
+}
+.score-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem 0;
+}
+.score {
+  font-size: 3rem;
+  background: #212121;
+  padding: 0.5rem 2rem;
+  border-radius: 8px;
+  margin: 0 1rem;
+  font-family: 'Digital-7', monospace;
+}
+.score-panel button {
+  margin: 0 0.2rem;
+  padding: 0.5rem 1rem;
+  font-size: 1.1rem;
+  border-radius: 6px;
+  border: none;
+  background: #43a047;
+  color: #fff;
+  cursor: pointer;
+}
+.faltas {
+  margin-top: 0.5rem;
+  font-size: 1.1rem;
+}
+.periodo-panel {
+  flex: 0.5;
+  text-align: center;
+}
+.periodo-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+.periodo {
+  font-size: 2.5rem;
+  background: #212121;
+  padding: 0.5rem 1.5rem;
+  border-radius: 8px;
+  margin: 0 1rem;
+  font-family: 'Digital-7', monospace;
+}
+.periodo-controls button {
+  margin: 0 0.5rem;
+  padding: 0.5rem 1.2rem;
+  font-size: 1.1rem;
+  border-radius: 6px;
+  border: none;
+  background: #fbc02d;
+  color: #212121;
+  cursor: pointer;
+}
+.balon {
+  width: 60px;
+  margin-top: 0.5rem;
+}
+@media (max-width: 700px) {
+  .marcador-container {
+    padding: 1rem;
+  }
+  .equipos-panel {
+    flex-direction: column;
+  }
+  .logo {
+    width: 60px;
+    height: 60px;
+  }
+  .score {
+    font-size: 2rem;
+    padding: 0.5rem 1rem;
+  }
+  .periodo {
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+  }
+}

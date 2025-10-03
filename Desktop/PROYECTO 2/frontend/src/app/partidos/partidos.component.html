@@ -1,0 +1,48 @@
+<div class="partidos-container">
+	<h2>Partidos</h2>
+	<div style="margin: 8px 0;">
+		<input type="text" [(ngModel)]="searchTerm" placeholder="Buscar por equipo" />
+		<label style="margin-left: 8px;">
+			<input type="checkbox" [(ngModel)]="filtroTerminado" [ngModelOptions]="{standalone: true}" /> Solo finalizados
+		</label>
+		<button (click)="cargarPartidos()">Buscar</button>
+	</div>
+	<form (ngSubmit)="crearPartido()">
+		<input type="number" [(ngModel)]="nuevoPartido.equipoLocalId" name="equipoLocalId" placeholder="ID Local" required />
+		<input type="number" [(ngModel)]="nuevoPartido.equipoVisitanteId" name="equipoVisitanteId" placeholder="ID Visitante" required />
+		<input type="datetime-local" [(ngModel)]="nuevoPartido.fecha" name="fecha" placeholder="Fecha" required />
+		<input type="number" [(ngModel)]="nuevoPartido.marcadorLocal" name="marcadorLocal" placeholder="Marcador Local" required />
+		<input type="number" [(ngModel)]="nuevoPartido.marcadorVisitante" name="marcadorVisitante" placeholder="Marcador Visitante" required />
+		<input type="number" [(ngModel)]="nuevoPartido.cuartoActual" name="cuartoActual" placeholder="Cuarto Actual" required />
+		<label>
+			<input type="checkbox" [(ngModel)]="nuevoPartido.terminado" name="terminado" /> Terminado
+		</label>
+		<button type="submit">Crear partido</button>
+	</form>
+	<div *ngIf="error" style="color: red; margin-top: 10px;">{{ error }}</div>
+	<ul>
+		<li *ngFor="let partido of partidos">
+			<span *ngIf="!partidoEditando || partidoEditando.id !== partido.id">
+				{{ partido.equipoLocalId }} vs {{ partido.equipoVisitanteId }} - {{ partido.fecha | date:'short' }}
+				({{ partido.marcadorLocal }} : {{ partido.marcadorVisitante }})
+				Cuarto: {{ partido.cuartoActual }}
+				<span *ngIf="partido.terminado">[Finalizado]</span>
+			</span>
+			<button *ngIf="!partidoEditando" (click)="iniciarEdicion(partido)">Editar</button>
+			<button *ngIf="!partidoEditando" (click)="eliminarPartido(partido.id)">Eliminar</button>
+			<span *ngIf="partidoEditando && partidoEditando.id === partido.id">
+				<input type="number" [(ngModel)]="partidoEditando.equipoLocalId" placeholder="ID Local" />
+				<input type="number" [(ngModel)]="partidoEditando.equipoVisitanteId" placeholder="ID Visitante" />
+				<input type="datetime-local" [(ngModel)]="partidoEditando.fecha" placeholder="Fecha" />
+				<input type="number" [(ngModel)]="partidoEditando.marcadorLocal" placeholder="Marcador Local" />
+				<input type="number" [(ngModel)]="partidoEditando.marcadorVisitante" placeholder="Marcador Visitante" />
+				<input type="number" [(ngModel)]="partidoEditando.cuartoActual" placeholder="Cuarto Actual" />
+				<label>
+					<input type="checkbox" [(ngModel)]="partidoEditando.terminado" /> Terminado
+				</label>
+				<button (click)="guardarEdicion()">Guardar</button>
+				<button (click)="cancelarEdicion()">Cancelar</button>
+			</span>
+		</li>
+	</ul>
+</div>
